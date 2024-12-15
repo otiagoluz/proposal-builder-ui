@@ -1,24 +1,21 @@
-import { Providers } from '../providers';
 import '../../styles/globals.css';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Proposal Builder',
+  title: 'Login',
   description: 'Build and manage your proposals efficiently',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
-      </body>
-    </html>
-  );
-}
+export default function LoginLayout({
+    children,
+  }: {
+    children: React.ReactNode;
+  }) {
+    return (
+      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+        <div className="inline-block max-w-lg text-center justify-center">
+          {children}
+        </div>
+      </section>
+    );
+  }
+
