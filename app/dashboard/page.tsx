@@ -21,7 +21,6 @@ export default function DashboardPage() {
           {proposals.map((proposal: any) => (
             <Card key={proposal.id} className="p-4">
               <h2 className="text-lg font-semibold">{proposal.projectName}</h2>
-              
               <Button
                 onPress={() => router.push(`/dashboard/proposals/${proposal.id}`)}
                 color="primary"

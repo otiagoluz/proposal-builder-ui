@@ -1,5 +1,2 @@
-import { SVGProps } from "react";
-
-export type IconSvgProps = SVGProps<SVGSVGElement> & {
-  size?: number;
-};
+export * from './icon-svg-propos.type'
+export * from './proposal.interface'
