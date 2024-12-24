@@ -1,9 +1,10 @@
+import { Proposal } from "@/types";
 import { useState, useEffect } from "react";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const useProposals = () => {
-  const [proposals, setProposals] = useState([]);
+  const [proposals, setProposals] = useState<Proposal[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -23,7 +24,7 @@ export const useProposals = () => {
           throw new Error(message || "Failed to fetch proposals");
         }
 
-        const data = await response.json();
+        const data: Proposal[] = await response.json();
         setProposals(data);
       } catch (err: any) {
         setError(err.message);

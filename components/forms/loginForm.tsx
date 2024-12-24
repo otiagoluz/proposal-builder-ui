@@ -16,7 +16,7 @@ export const LoginForm = () => {
     const success = await login(email, password);
 
     if (success) {
-      router.push("/dashboard");
+      router.push("/proposals");
     }
   };
 
