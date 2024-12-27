@@ -1,6 +1,7 @@
 'use client'
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import {
   Table,
   TableHeader,
@@ -20,7 +21,7 @@ export const columns = [
   { name: "Client Name", uid: "clientName" },
   { name: "Project Name", uid: "projectName" },
   { name: "Status", uid: "status" },
-  { name: "Actions", uid: "actions" },
+  // { name: "Actions", uid: "actions" },
 ];
 
 // Mapeamento de cores de status
@@ -30,8 +31,8 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   declined: "danger",
 };
 
-
 export default function ProposalsTable() {
+  const router = useRouter();
   const { proposals, loading, error } = useProposals();
 
   const renderCell = React.useCallback(
@@ -60,25 +61,25 @@ export default function ProposalsTable() {
             </Chip>
           );
         case "actions":
-          return (
-            <div className="relative flex items-center justify-center gap-2">
-              <Tooltip content="View Details">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EyeIcon />
-                </span>
-              </Tooltip>
-              <Tooltip content="Edit Proposal">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EditIcon />
-                </span>
-              </Tooltip>
-              <Tooltip color="danger" content="Delete Proposal">
-                <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                  <DeleteIcon />
-                </span>
-              </Tooltip>
-            </div>
-          );
+          // return (
+          //   <div className="relative flex items-center justify-center gap-2">
+          //     <Tooltip content="View Details">
+          //       <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+          //         <EyeIcon />
+          //       </span>
+          //     </Tooltip>
+          //     <Tooltip content="Edit Proposal">
+          //       <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+          //         <EditIcon />
+          //       </span>
+          //     </Tooltip>
+          //     <Tooltip color="danger" content="Delete Proposal">
+          //       <span className="text-lg text-danger cursor-pointer active:opacity-50">
+          //         <DeleteIcon />
+          //       </span>
+          //     </Tooltip>
+          //   </div>
+          // );
         default:
           return cellValue;
       }
@@ -100,7 +101,11 @@ export default function ProposalsTable() {
       </TableHeader>
       <TableBody items={proposals}>
         {(item) => (
-          <TableRow key={item.id}>
+          <TableRow
+            key={item.id}
+            className="cursor-pointer"
+            onClick={() => router.push(`/proposals/${item.id}`)}
+          >
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
           </TableRow>
         )}
